@@ -15,6 +15,10 @@ public abstract class TitleColoredAttributeInspector<T> : OdinAttributeDrawer<T>
 		SirenixEditorGUI.HorizontalLineSeparator(Attribute.Color);
 		this.CallNextDrawer(label);
 	}
+	protected override bool CanDrawAttributeProperty(InspectorProperty property)
+	{
+		return !property.UnityPropertyPath.Contains("Array");
+	}
 }
 public sealed class TitleGreenAttributeInspector : TitleColoredAttributeInspector<TitleGreenAttribute> { }
 public sealed class TitleRedAttributeInspector : TitleColoredAttributeInspector<TitleRedAttribute> { }
