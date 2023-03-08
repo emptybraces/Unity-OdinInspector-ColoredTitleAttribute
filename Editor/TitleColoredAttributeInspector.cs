@@ -17,7 +17,7 @@ public abstract class TitleColoredAttributeInspector<T> : OdinAttributeDrawer<T>
 	}
 	protected override bool CanDrawAttributeProperty(InspectorProperty property)
 	{
-		return !property.UnityPropertyPath.Contains("Array");
+		return !property.UnityPropertyPath.Contains("Array.data");
 	}
 }
 public sealed class TitleGreenAttributeInspector : TitleColoredAttributeInspector<TitleGreenAttribute> { }
