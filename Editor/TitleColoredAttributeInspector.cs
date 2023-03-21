@@ -1,25 +1,29 @@
-using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities.Editor;
 using UnityEngine;
 
-public abstract class TitleColoredAttributeInspector<T> : OdinAttributeDrawer<T> where T : TitleColoredAttribute
+namespace Sirenix.OdinInspector.Editor
 {
-	protected override void DrawPropertyLayout(GUIContent label)
+	public abstract class TitleColoredAttributeInspector<T> : OdinAttributeDrawer<T> where T : TitleColoredAttribute
 	{
-		GUILayout.Space(8);
-		var bold_label = UnityEditor.EditorStyles.boldLabel;
-		bold_label.fontSize = Attribute.Size;
-		GUIHelper.PushColor(Attribute.Color);
-		GUILayout.Label(Attribute.Title, bold_label);
-		GUIHelper.PopColor();
-		SirenixEditorGUI.HorizontalLineSeparator(Attribute.Color);
-		this.CallNextDrawer(label);
+		protected override void DrawPropertyLayout(GUIContent label)
+		{
+			GUILayout.Space(8);
+			var bold_label = SirenixGUIStyles.BoldTitle;
+			var size = bold_label.fontSize;
+			bold_label.fontSize = Attribute.Size;
+			GUIHelper.PushColor(Attribute.Color);
+			// SirenixEditorGUI.Title(Attribute.Title, "", TextAlignment.Left, true, true);
+			GUILayout.Label(Attribute.Title,  bold_label);
+			GUIHelper.PopColor();
+			SirenixEditorGUI.HorizontalLineSeparator(Attribute.Color);
+			bold_label.fontSize = size;
+			this.CallNextDrawer(label);
+		}
 	}
-	protected override bool CanDrawAttributeProperty(InspectorProperty property)
-	{
-		return !property.UnityPropertyPath.Contains("Array.data");
-	}
+	[DrawerPriority(2, 0, 0)]
+	public sealed class TitleGreenAttributeInspector : TitleColoredAttributeInspector<TitleGreenAttribute> { }
+	[DrawerPriority(2, 0, 0)]
+	public sealed class TitleRedAttributeInspector : TitleColoredAttributeInspector<TitleRedAttribute> { }
+	[DrawerPriority(2, 0, 0)]
+	public sealed class TitleBlueAttributeInspector : TitleColoredAttributeInspector<TitleBlueAttribute> { }
 }
-public sealed class TitleGreenAttributeInspector : TitleColoredAttributeInspector<TitleGreenAttribute> { }
-public sealed class TitleRedAttributeInspector : TitleColoredAttributeInspector<TitleRedAttribute> { }
-public sealed class TitleBlueAttributeInspector : TitleColoredAttributeInspector<TitleBlueAttribute> { }
