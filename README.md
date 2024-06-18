@@ -1,4 +1,4 @@
-# OdinInspector_ColoredTitleAttribute
+# OdinInspector ColoredTitleAttribute
 Implementation of colored title attributes to OdinInspector plugins
 
 ![image](https://user-images.githubusercontent.com/1441835/221484997-17db827c-aee4-48c4-b3f0-43784cc6dc87.png)
